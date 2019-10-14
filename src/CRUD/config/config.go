@@ -9,8 +9,8 @@ import (
 // GetMySQLDB is public
 func GetMySQLDB() (db *sql.DB, err error) {
 	dbDriver := "mysql"
-	dbUser := "root"
-	dbPass := ""
+	dbUser := "vahid"
+	dbPass := "" //pass
 	dbName := "vp_demo_1"
 	db, err = sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
 	return
