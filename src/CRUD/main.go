@@ -2,15 +2,86 @@ package main
 
 import (
 	"CRUD/config"
+	"CRUD/entities"
 	"CRUD/models"
 	"fmt"
 )
 
 func main() {
-	demo1CallFind()
+	demoDelete()
+	demoCallFindAll()
+
 }
 
-func demo1CallFind() {
+func demoDelete() {
+	db, err := config.GetMySQLDB()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		productModel := models.ProductModel{
+			Db: db,
+		}
+		rows, err := productModel.Delete(3)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			if rows > 0 {
+				fmt.Println("Done.")
+			}
+		}
+	}
+}
+
+func demoUpdate() {
+	db, err := config.GetMySQLDB()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		productModel := models.ProductModel{
+			Db: db,
+		}
+		product := entities.Product{
+			ID:       5,
+			Name:     "def",
+			Price:    44.5,
+			Quantity: 4,
+			Status:   false,
+		}
+		rows, err := productModel.Update(product)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			if rows > 0 {
+				fmt.Println("Done.")
+			}
+		}
+	}
+}
+
+func demoInsert() {
+	db, err := config.GetMySQLDB()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		productModel := models.ProductModel{
+			Db: db,
+		}
+		product := entities.Product{
+			Name:     "abc",
+			Price:    4.5,
+			Quantity: 777,
+			Status:   true,
+		}
+		err := productModel.Create(&product)
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Println("Lastest Id: ", product.ID)
+		}
+	}
+}
+
+func demoCallFind() {
 	db, err := config.GetMySQLDB()
 	if err != nil {
 		fmt.Println(err)
@@ -34,7 +105,7 @@ func demo1CallFind() {
 	}
 }
 
-func demo1CallFindAll() {
+func demoCallFindAll() {
 	db, err := config.GetMySQLDB()
 	if err != nil {
 		fmt.Println(err)

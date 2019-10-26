@@ -10,6 +10,25 @@ type ProductModel struct {
 	Db *sql.DB
 }
 
+//Update is public
+func (productModel ProductModel) Update(product entities.Product) (int64, error) {
+	result, err := productModel.Db.Exec("update product set name= ? ,price = ?,quantity =?,status =? where id=?", product.Name, product.Price, product.Quantity, product.Status, product.ID)
+
+	if err != nil {
+		return 0, err
+	}
+	return result.RowsAffected()
+}
+
+//Delete is public
+func (productModel ProductModel) Delete(id int64) (int64, error) {
+	result, err := productModel.Db.Exec("delete from product where id = ?", id)
+	if err != nil {
+		return 0, err
+	}
+	return result.RowsAffected()
+}
+
 //Create is public
 func (productModel ProductModel) Create(product *entities.Product) error {
 	result, err := productModel.Db.Exec("insert into product(name,price,quantity,status) values(?,?,?,?)", product.Name, product.Price, product.Quantity, product.Status)
