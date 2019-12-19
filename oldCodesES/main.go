@@ -21,7 +21,7 @@ func delete() {
 	svc := sqs.New(sess)
 
 	// URL to our queue
-	qURL := "https://sqs.eu-west-1.amazonaws.com/918389089649/ElasticSearchQueue"
+	qURL :=...
 
 	result, err := svc.ReceiveMessage(&sqs.ReceiveMessageInput{
 		AttributeNames: []*string{
