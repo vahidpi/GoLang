@@ -67,7 +67,7 @@ func send() {
 	svc := sqs.New(sess)
 
 	// URL to our queue
-	qURL := "https://sqs.eu-west-1.amazonaws.com/918389089649/ElasticSearchQueue"
+	qURL := ...
 
 	result, err := svc.SendMessage(&sqs.SendMessageInput{
 		DelaySeconds: aws.Int64(10),
@@ -105,7 +105,7 @@ func receive() {
 	svc := sqs.New(sess)
 
 	// URL to our queue
-	qURL := "https://sqs.eu-west-1.amazonaws.com/918389089649/ElasticSearchQueue"
+	qURL := ..
 
 	for {
 
