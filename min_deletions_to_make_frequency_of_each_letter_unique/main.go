@@ -22,21 +22,12 @@ func solution(s string) int {
 	var listTarget []int
 	for _, val := range listOfChar {
 		a := val
-		if !isInList(a, listTarget) {
+		for a != 0 && isInList(a, listTarget) {
+			count++
+			a = a - 1
+		}
+		if a != 0 {
 			listTarget = append(listTarget, a)
-		} else {
-			de := true
-			for j := a - 1; de; j-- {
-				if j >= 0 {
-					count++
-					if !isInList(j, listTarget) {
-						listTarget = append(listTarget, j)
-						de = false
-					}
-				} else {
-					de = false
-				}
-			}
 		}
 	}
 
