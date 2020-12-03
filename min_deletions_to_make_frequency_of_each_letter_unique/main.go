@@ -7,11 +7,9 @@ import (
 
 func main() {
 	fmt.Println("Start")
-
 	s := "aabbffddeaee"
 	minNumber := solution(s)
 	fmt.Printf("Min Deletions to Make Frequency of Each Letter Unique for '%s' is %d \n", s, minNumber)
-
 }
 
 func solution(s string) int {
@@ -21,12 +19,12 @@ func solution(s string) int {
 		listOfChar[char] = listOfChar[char] + 1
 	}
 
-	if len(listOfChar) <= 1 {
-		return 0
-	}
-	if len(listOfChar) == 2 {
-		return 1
-	}
+	// if len(listOfChar) <= 1 {
+	// 	return 0
+	// }
+	// if len(listOfChar) == 2 {
+	// 	return 1
+	// }
 
 	var list []int
 	for _, val := range listOfChar {
