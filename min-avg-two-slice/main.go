@@ -7,50 +7,47 @@ import (
 func main() {
 	fmt.Println("Start")
 
-	A := []int{4, 2, 2, 5, 1, 5, 8}
+	A := []int{4, 2, 2, 1, 1, 1, 8}
 	indexNumber := solution(A)
 	fmt.Printf("The start index of Min Avg Two Slice is %d \n", indexNumber)
+
 }
 
 func solution(A []int) int {
 
-	if len(A) == 2 {
-		return 0
-	}
+	var avg float64 = 100000
+	index := -1
 
-	minSliceTwo := A[0] + A[1]
-	minTwoIndex := 0
-
-	minSliceThree := 100000
-	minThreeIndex := 0
-
-	for i := 2; i < len(A); i++ {
-		sliceTwo := A[i-1] + A[i]
-		if sliceTwo < minSliceTwo {
-			minSliceTwo = sliceTwo
-			minTwoIndex = i - 1
-		}
-
-		sliceThree := sliceTwo + A[i-2]
-		if sliceThree < minSliceThree {
-			minSliceThree = sliceThree
-			minThreeIndex = i - 2
+	for i := 0; i < len(A)-1; i++ {
+		tmpAvg := float64(A[i]+A[i+1]) / 2
+		if tmpAvg < avg {
+			index = i
+			avg = tmpAvg
 		}
 	}
-	averageMinTwo := minSliceTwo * 3
-	averageMinThree := minSliceThree * 2
 
-	if averageMinTwo == averageMinThree {
-		if minTwoIndex < minThreeIndex {
-			return minTwoIndex
+	return index
+}
+
+func solutionMinAvg(A []int) int {
+	var avg float64 = 100000
+	index := -1
+	for i := 0; i < len(A)-1; i++ {
+		for j := i + 1; j < len(A); j++ {
+			tmpAvg := float64(sum(A[i:j])) / float64(j-i+1)
+			if tmpAvg < avg {
+				avg = tmpAvg
+				index = i
+			}
 		}
-		return minThreeIndex
-
 	}
-	if averageMinTwo < averageMinThree {
-		return minTwoIndex
-	}
-	return minThreeIndex
+	return index
+}
 
-	//return 0
+func sum(arr []int) int {
+	sum := 0
+	for i := 0; i < len(arr); i++ {
+		sum = sum + arr[i]
+	}
+	return sum
 }
